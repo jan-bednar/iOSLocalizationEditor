@@ -66,6 +66,34 @@ final class LocalizationsDataSource: NSObject {
             }
         }
     }
+    
+    func export() {
+        var output = ""
+        
+        localizationGroups.forEach { group in
+            output += "\n\n\(group.name)\n\n"
+            group.localizations.forEach { localization in
+                output += "\n\n\(localization.language)\n\n"
+                localization.translations.forEach { string in
+                    if string.value.isEmpty {
+                        output += [string.key, " = ", masterLocalization!.translations.first{ $0.key == string.key}!.value,";","\n"].joined()
+                    }
+                }
+            }
+        }
+        
+        let file = "my-export-text.txt"
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+
+            let fileURL = dir.appendingPathComponent(file)
+
+            //writing
+            do {
+                try output.write(to: fileURL, atomically: false, encoding: .utf8)
+            }
+            catch {/* error handling here */}
+        }
+    }
 
     /**
      Selects given localization group, converting its data to a more usable form and returning an array of available languages

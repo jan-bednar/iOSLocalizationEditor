@@ -16,6 +16,8 @@ protocol WindowControllerToolbarDelegate: AnyObject {
      Invoked when user requests opening a folder
      */
     func userDidRequestFolderOpen()
+    
+    func userDidRequestExport()
 
     /**
      Invoked when user requests filter change
@@ -93,6 +95,7 @@ final class WindowController: NSWindowController {
     private func setupMenu() {
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
         appDelegate.openFolderMenuItem.action = #selector(WindowController.openAction(sender:))
+        appDelegate.exportMenuItem.action = #selector(WindowController.exportAction)
     }
 
     private func setupSearch() {
@@ -148,6 +151,10 @@ final class WindowController: NSWindowController {
 
     @objc private func openAction(sender _: NSMenuItem) {
        delegate?.userDidRequestFolderOpen()
+    }
+    
+    @objc private func exportAction() {
+        delegate?.userDidRequestExport()
     }
 }
 

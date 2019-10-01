@@ -11,7 +11,8 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var openFolderMenuItem: NSMenuItem!
-
+    @IBOutlet weak var exportMenuItem: NSMenuItem!
+    
     func applicationDidFinishLaunching(_: Notification) {}
 
     func applicationWillTerminate(_: Notification) {}

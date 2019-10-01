@@ -196,6 +196,7 @@ extension ViewController: ActionsCellDelegate {
 // MARK: - WindowControllerToolbarDelegate
 
 extension ViewController: WindowControllerToolbarDelegate {
+    
     /**
      Invoked when user requests adding a new translation
      */
@@ -249,6 +250,10 @@ extension ViewController: WindowControllerToolbarDelegate {
      */
     func userDidRequestFolderOpen() {
         openFolder()
+    }
+    
+    func userDidRequestExport() {
+        dataSource.export()
     }
 }
 
